@@ -1,47 +1,36 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue'
+const valor = ref(10)
+
+const temperatura_em_celsius = ref(0)
+const temperatura_em_farenheit = ref(0)
+
+function converter_para_farenheit() {
+  temperatura_em_farenheit.value =  (temperatura_em_celsius.value * 9 ) / 5 + 32
+}
+
+function decrementar () {
+  valor.value--
+}
+function duplicar () {
+  valor.value = valor.value * 2
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <h1>Hello World!</h1>
+  <button v-on:click="valor++">Incrementar</button>
+  <button v-on:click="decrementar">Decrementar</button>
+  <button v-on:click="duplicar">Duplicar</button>
+  <p>Valor: {{ valor }}</p>
+  <h2>Conversor de temperatura</h2>
+  <input v-model="temperatura_em_celsius" type="number" step="0.1" />
+  <button v-on:click="converter_para_farenheit">Converter</button>
+  <p>Temperatura em Farenheit: {{ temperatura_em_farenheit }}</p>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  button{
+    font-weight: bold;
   }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
